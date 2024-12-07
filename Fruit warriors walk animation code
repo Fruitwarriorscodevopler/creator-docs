@@ -1,0 +1,43 @@
+local tool = script.parent
+local anim1 = Instance.new("Animataion"
+local anim2 = Instance.new("Animataion"
+local uis = game:Getservice("UserInputService")
+local Player = game:Getservice("Players").LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+anim1.AnimationId = "http://www.roblox.com/asset/?id=7102358710"
+anim2.AnimatedId = "http://www.roblox.com/asset/?id=7790870146"
+local idle
+local run
+ local walk
+local walk2
+
+tool.Equipped:Conncet(function()
+    idle = character.Humanoid:LoadAnimation(anim1)
+    idle.Priority = Enum.AnimationPriority.Action
+    idle.looped = true
+    idle:Play()
+    uis.InputBegan:connect(fuction(input)
+        if input.KeyCode == Enum.KeyCode.W or Enum.KeyCode.A or Enum.KeyCode.D or Enum.Keycod.s then
+            idle:Stop()
+            walk = character.Humanoid:LoadAnimation(anim2)
+            walk.Priority = Enum.AnimationPriority.Movement
+            walk.Looped = true
+            walk:Play()
+        
+        end
+    end)
+    uis.InputEnded:Connect(fuction(input)
+        if input.KeyCode == Enum.KeyCode.W or Enum.KeyCode.A or Enum.KeyCode.D or Enum.KeyCode then
+            walk:Stop()
+            idle:Play()
+
+        end
+    end)
+    tool.Unequipped:Connect(function()
+        if idle or walk then
+            idle:stop()
+            walk:stop()
+         end
+     end)
+ end)
